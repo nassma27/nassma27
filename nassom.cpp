@@ -4,10 +4,13 @@
 using namespace std;
  int main()
 {
-    string student_name, student_id;
+ 
+   
+  string student_name, student_id;
     char depratment;
     int result;
-
+do{
+ 
     cout << "Student Name: ";
     cin >> student_name;
     cout << " Student ID: ";
@@ -15,7 +18,7 @@ using namespace std;
     cout << "Depratment: ";
     cin >> depratment;
     cout << " Result: ";
-    cin >> result;
+    cin >>result;
 
     string division;
     char grade;
@@ -57,7 +60,9 @@ using namespace std;
         cout << "Name: " << student_name << end1;
         cout << "ID: " << student_id << end1;
         cout <<" Grade: " << grade << end1;
-
+  }
+  
+  while(==Exit)
         return 0;
         
 
