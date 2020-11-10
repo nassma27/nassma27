@@ -4,12 +4,30 @@
 using namespace std;
  int main()
 {
- 
+ student studentArrey[10];
+  for(int i=0;i<10; ++i)
+  {
+   student student;
+   student.readstudrnt();
+   studentArrey[i] =student;
+  }
    
+  student subject studentsubjectArrey[8];
+     for(int i=0; i < 7; i++)
+     {
+      student subject  student subject;
+      student subjct.readstudentsubjct();
+      studentsubjectArrey[i] =student subject;
+     }
+  
+  
+  
+  
+  
   string student_name, student_id;
-    char depratment;
-    int result;
-do{
+    char depratment,general apprection;
+    int result,verge,
+
  
     cout << "Student Name: ";
     cin >> student_name;
@@ -60,9 +78,24 @@ do{
         cout << "Name: " << student_name << end1;
         cout << "ID: " << student_id << end1;
         cout <<" Grade: " << grade << end1;
+  
+  
+  for(int i =0; i < 10; ++i)
+  {  cout << studentsArrey[i];
   }
   
-  while(==Exit)
+  for(int i =0: i < 7; ++i)
+  {
+   cout << studentsubjectArrey[i];
+   cout << "Verage is : "<< studentsubjectArrey[i]/3 << end1;
+   cuot << "General appreciation is :"<< verage << end1;
+  }
+    
+    
+  
+  
+  
+  
         return 0;
         
 
