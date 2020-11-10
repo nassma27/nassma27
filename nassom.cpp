@@ -1,5 +1,6 @@
 #include <iostream>
 #include <string>
+#include <fstream>
 
 using namespace std;
 
@@ -100,11 +101,11 @@ using namespace std;
     char depratment , general apprection;
     int result;
     output(student_name ,student_id ,depratment ,generl apprection ,result)
-     cout << "student_name= " << student_name<<end1;
-     cout << "student_id= " << student_id<<end1;
-     cout << "depratment= " << depratment<<end1;
-     cout << "general apprection= " << general apprection<<end1;
-     cout << "result= " << result<<end;
+     file << "student_name= " << student_name<<end1;
+     file << "student_id= " << student_id<<end1;
+     file << "depratment= " << depratment<<end1;
+     file << "general apprection= " << general apprection<<end1;
+     file << "result= " << result<<end;
     
   
   
