@@ -2,7 +2,10 @@
 #include <string>
 
 using namespace std;
- int main()
+
+   void outpout( string x1, string x2,  char x3, char x4, int x5)
+    
+    
 {
  student studentArrey[10];
   for(int i=0;i<10; ++i)
@@ -87,10 +90,21 @@ using namespace std;
   for(int i =0: i < 7; ++i)
   {
    cout << studentsubjectArrey[i];
-   cout << "Verage is : "<< studentsubjectArrey[i]/3 << end1;
+   cout << "Verage is : "<<  the sum of studentsubjectArrey[i]/8 << end1;
    cuot << "General appreciation is :"<< verage << end1;
   }
     
+   int main()
+   {
+    string student_name , student_id ;
+    char depratment , general apprection;
+    int result;
+    output(student_name ,student_id ,depratment ,generl apprection ,result)
+     cout << "student_name= " << student_name<<end1;
+     cout << "student_id= " << student_id<<end1;
+     cout << "depratment= " << depratment<<end1;
+     cout << "general apprection= " << general apprection<<end1;
+     cout << "result= " << result<<end;
     
   
   
