@@ -1,0 +1,84 @@
+
+import pandas as pd
+from io import StringIO
+import tkinter as tk
+from tkinter.scrolledtext import ScrolledText
+from sklearn.ensemble  import IsolationForest
+from sklearn.preprocessing import LabelEncoder
+import numpy as np
+
+# البيانات
+data = """Time(sec),Last Device,At Device,Type
+0.000,,PC13,ICMP
+0.000,,PC13,ARP
+0.001,PC13,Multilayer Switch1,ARP
+0.002,Multilayer Switch1,PC13,ARP
+0.002,Multilayer Switch1,PC14,ARP
+0.002,Multilayer Switch1,PC12,ARP
+0.002,Multilayer Switch1,PC11,ARP
+0.002,Multilayer Switch1,PC10,ARP
+0.002,,PC13,ICMP
+0.003,PC13,Multilayer Switch1,ICMP
+0.003,,Multilayer Switch1,ARP
+0.004,Multilayer Switch1,PC15,ARP
+0.004,Multilayer Switch1,PC16,ARP
+0.004,Multilayer Switch1,PC17,ARP
+0.004,Multilayer Switch1,PC18,ARP
+0.005,PC15,Multilayer Switch1,ARP
+1.434,,Multilayer Switch1,STP
+1.435,Multilayer Switch1,Server1,STP
+1.435,Multilayer Switch1,Server0,STP
+1.436,,Multilayer Switch1,STP
+"""
+
+# التحميل والمعالجة
+df = pd.read_csv(StringIO(data))
+df["Time(sec)"] = pd.to_numeric(df["Time(sec)"], errors="coerce")
+df["Last Device"].fillna("Unknown", inplace=True)
+df["At Device"].fillna("Unknown", inplace=True)
+df["Type"].fillna("Unknown", inplace=True)
+df["Time(sec)"].fillna(df["Time(sec)"].mean(), inplace=True)
+
+# ترميز النصوص
+le_last = LabelEncoder()
+le_at = LabelEncoder()
+le_type = LabelEncoder()
+
+df["LastDevice_encoded"] = le_last.fit_transform(df["Last Device"])
+df["AtDevice_encoded"] = le_at.fit_transform(df["At Device"])
+df["Type_encoded"] = le_type.fit_transform(df["Type"])
+
+# إعداد الميزات
+features = df[["Time(sec)", "LastDevice_encoded", "AtDevice_encoded", "Type_encoded"]]
+
+#  تدريب نموذج الذكاء الصناعي 
+model = IsolationForest(contamination=0.15, random_state=42)
+df["Anomaly"] = model.fit_predict(features)
+
+# بناء النتائج
+output = []
+output.append("--- Basic Analysis ---")
+output.append(f"Total events: {len(df)}")
+output.append("Event types:\n" + str(df["Type"].value_counts()))
+output.append("Source devices:\n" + str(df["Last Device"].value_counts()))
+output.append("Destination devices:\n" + str(df["At Device"].value_counts()))
+
+output.append("\n--- AI-Based Anomaly Detection ---")
+anomalies = df[df["Anomaly"] == -1]
+output.append(f"Normal events: {len(df) - len(anomalies)}")
+output.append(f"Anomalous events: {len(anomalies)}")
+output.append("Sample anomalies:\n" + str(anomalies[["Time(sec)", "Last Device", "At Device", "Type"]].head(5)))
+
+# واجهة رسومية
+def show_results():
+    root = tk.Tk()
+    root.title("Network Traffic Analysis with AI")
+    root.geometry("900x600")
+
+    txt = ScrolledText(root, wrap=tk.WORD, font=("Consolas", 10))
+    txt.pack(expand=True, fill='both')
+    txt.insert(tk.END, "\n".join(output))
+    txt.config(state=tk.DISABLED)
+    root.mainloop()
+
+show_results()
