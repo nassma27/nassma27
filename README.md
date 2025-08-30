@@ -93,7 +93,7 @@ The approach complements traditional monitoring tools by providing an automated,
 
 
 ## Contributors
-- **Nassma Hassan Abound 
+- **Nassma Hassan Aboud 
 - Abrar Alteb Mohamed** – 
 
 ---
